@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="form-container">
+
+    <form [formGroup]="rentForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="yearOneSales">Year One Sales</label>
+        <input type="number" id="yearOneSales" class="form-control"
+          formControlName="yearOneSales">
+      </div>
+
+      <div class="form-group">
+        <label for="baseRentFirstFiveYears">Base Rent for First 5 Years</label>
+        <input type="number" id="baseRentFirstFiveYears" class="form-control"
+          formControlName="baseRentFirstFiveYears">
+      </div>
+
+      <div class="form-group">
+        <label for="baseRentLastFiveYears">Base Rent for Last 5 Years</label>
+        <input type="number" id="baseRentLastFiveYears" class="form-control"
+          formControlName="baseRentLastFiveYears">
+      </div>
+
+      <div class="form-group">
+        <label for="tier1Rate">Tier 1 Rate (%)</label>
+        <input type="number" id="tier1Rate" class="form-control"
+          formControlName="tier1Rate">
+      </div>
+
+      <div class="form-group">
+        <label for="tier2Rate">Tier 2 Rate (%)</label>
+        <input type="number" id="tier2Rate" class="form-control"
+          formControlName="tier2Rate">
+      </div>
+
+      <div class="form-group">
+        <label for="tier3Rate">Tier 3 Rate (%)</label>
+        <input type="number" id="tier3Rate" class="form-control"
+          formControlName="tier3Rate">
+      </div>
+
+      <div class="form-group">
+        <label for="annualSalesGrowth">Annual Sales Growth (%)</label>
+        <input type="number" id="annualSalesGrowth" class="form-control"
+          formControlName="annualSalesGrowth">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Calculate Rent</button>
+    </form>
+  </div>
+
+  <div *ngIf="rentCalculationResult && rentCalculationResult.length > 0">
+    <h2>Calculation Results</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Base Rent</th>
+          <th>Sales Revenue</th>
+          <th>Tier 1 Rent</th>
+          <th>Tier 2 Rent</th>
+          <th>Tier 3 Rent</th>
+          <th>Total Percentage Rent</th>
+          <th>Total Rent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let result of rentCalculationResult">
+          <td>{{ result.year }}</td>
+          <td>{{ result.baseRent | currency:'USD':true }}</td>
+          <td>{{ result.salesRevenue | currency:'USD':true }}</td>
+          <td>{{ result.tier1Rent | currency:'USD':true }}</td>
+          <td>{{ result.tier2Rent | currency:'USD':true }}</td>
+          <td>{{ result.tier3Rent | currency:'USD':true }}</td>
+          <td>{{ result.totalPercentageRent | currency:'USD':true }}</td>
+          <td>{{ result.totalRent | currency:'USD':true }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
